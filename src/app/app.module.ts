@@ -8,7 +8,12 @@ import { TP2Component } from './tp2/tp2.component';
 import { Tp1Component } from './tp1/tp1.component';
 import {AppComponent} from "./app.component";
 import {FilterpipePipe} from "./pipe/filterpipe.pipe";
-import { HighlightDirectiveDirective } from './directives/highlight-directive.directive';
+
+import { Click1Directive } from './directives/click1.directive';
+import { NomPipe } from './pipe/nom.pipe';
+import { PrixPipe } from './pipe/prix.pipe';
+import { StockPipe } from './pipe/stock.pipe';
+import {HighlightDirectiveDirective} from "./directives/highlight-directive.directive";
 
 @NgModule({
   declarations: [
@@ -17,6 +22,10 @@ import { HighlightDirectiveDirective } from './directives/highlight-directive.di
     Tp1Component,
     FilterpipePipe,
     FilterpipePipe,
+    Click1Directive,
+    NomPipe,
+    PrixPipe,
+    StockPipe,
     HighlightDirectiveDirective
   ],
     imports: [

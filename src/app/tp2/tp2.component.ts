@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProductService} from "../services/product.service";
 import {Product} from "../entite/product";
 import { UUID } from 'angular2-uuid';
+import {NomPipe} from "../pipe/nom.pipe";
 
 @Component({
   selector: 'app-tp2',
@@ -18,8 +19,6 @@ export class TP2Component implements OnInit{
   stock !: boolean
   price !: 0
   category !: ''
-
-
 
 
   add : boolean = false;
@@ -71,12 +70,29 @@ export class TP2Component implements OnInit{
 
 
   btn1_click() {
-    this.btn1 = !this.btn1
+    if (this.btn1 == false){
+      this.btn1 =!this.btn1
+    }else {
+      this.ngOnInit()
+      this.btn1 =! this.btn1
+    }
+
+
   }
   btn2_click() {
-    this.btn2 = !this.btn2
+    if (this.btn2 == false){
+      this.btn2 =!this.btn2
+    }else {
+      this.ngOnInit()
+      this.btn2 =! this.btn2
+    }
   }
   btn3_click() {
-    this.btn3 = !this.btn3
+    if (this.btn3 == false){
+      this.btn3 =!this.btn3
+    }else {
+      this.ngOnInit()
+      this.btn3 =! this.btn3
+    }
   }
 }

@@ -9,6 +9,7 @@ export class HighlightDirectiveDirective implements OnInit{
 
   @Input() Highlight :boolean = false
 
+
   ngOnInit() {
     const cells = this.el.nativeElement.querySelectorAll('td');
     cells.forEach((cell: HTMLElement) => {
