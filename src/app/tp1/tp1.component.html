@@ -1,0 +1,76 @@
+<div *ngIf="add == true; else ndd" class="container m-l-5 mt-5">
+  <div class="card">
+    <div class="card-header">
+      <p>Liste des Taches</p>
+      <button (click)="add = !add" class="btn btn-outline-info">
+        Ajouter
+      </button>
+    </div>
+    <div class="card-body">
+
+      <table class="table">
+        <thead class="table-header">
+        <tr>
+          <th>Id</th><th>Description</th><th>Progress</th><th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let li of List_1">
+          <td>{{li.id}}</td><td>{{li.description}}</td><td>{{li.completed}}</td>
+          <td><button [ngClass]="li.completed == true ? 'disabled btn-outline-dark': 'btn-dark' "
+                      (click)="valid(li)" class="btn">Terminer</button></td>
+
+        </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+  </div>
+
+
+</div>
+<ng-template #ndd>
+  <div class="card w-25 position-absolute top-50 start-50 translate-middle">
+    <div class="card-body">
+
+
+      <form>
+        <div class="form-row align-items-center">
+          <div class="col-auto">
+            <label class="sr-only" for="inlineFormInput">Task</label>
+            <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Description"
+                   [(ngModel)]="description" name="newTask">
+          </div>
+          <!--      <div class="col-auto">-->
+          <!--        <label class="sr-only" for="inlineFormInputGroup">Username</label>-->
+          <!--        <div class="input-group mb-2">-->
+          <!--          <div class="input-group-prepend">-->
+          <!--            <div class="input-group-text">@</div>-->
+          <!--          </div>-->
+          <!--          <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">-->
+          <!--        </div>-->
+          <!--      </div>-->
+          <div class="col-auto">
+            <div class="form-check mb-2">
+              <input  class="form-check-input" type="checkbox" id="autoSizingCheck" [checked]="valider" (change)="valider = !valider">
+              <label class="form-check-label" for="autoSizingCheck">
+                Completed
+              </label>
+
+            </div>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-2" (click)="add_Task()">Ajouter</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+<router-outlet></router-outlet>

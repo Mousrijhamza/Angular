@@ -1,0 +1,101 @@
+<div *ngIf="add == false; else add_prod" class="container mt-5 border">
+
+  <table class="table">
+    <thead class="table-header ">
+
+    <nav class="navbar " style="width: 165%">
+      <div class="d-flex w-100">
+        <button class="btn btn-primary me-auto" (click)="add_produit()">Add</button>
+        <form>
+          <label>Search: </label>
+          <input type="text" class="ms-1" [(ngModel)]="searchTerm" name="searchTerm" placeholder="search">
+        </form>
+      </div>
+    </nav>
+
+    <tr>
+      <th class="border position-relative" >Id</th>
+      <th class="border position-relative">Name
+
+        <button name="btn1" (click)="btn1_click()" class="btn btn-link position-absolute top-50 end-0 translate-middle-y p-2">
+          <i [ngClass]="btn1 ? 'bi-arrow-up-square-fill' : 'bi-arrow-up-square' " class="bi "></i></button>
+        </th>
+      <th class="border position-relative">Price
+        <button name="btn2" (click)="btn2_click()" class="btn btn-link position-absolute top-50 end-0 translate-middle-y p-2">
+          <i [ngClass]="btn2 ? 'bi-arrow-up-square-fill' : 'bi-arrow-up-square' " class="bi"></i></button>
+      </th>
+      <th class="border position-relative">Stock
+        <button name="btn3" (click)="btn3_click()" class="btn btn-link position-absolute top-50 end-0 translate-middle-y p-2">
+          <i [ngClass]="btn3 ? 'bi-arrow-up-square-fill' : 'bi-arrow-up-square' " class="bi"></i></button>
+
+      </th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr *ngFor="let li of _products | filterPipe:searchTerm" [Highlight]="li.stock">
+      <td>{{li.id}}</td>
+      <td>{{li.name}}</td>
+      <td>{{li.price | currency : 'EUR'}}</td>
+
+      <td><i *ngIf="li.stock == true" style="color: green" >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
+          <circle cx="8" cy="8" r="8"/>
+        </svg>
+      </i></td>
+
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<ng-template #add_prod>
+
+  <div class="container">
+    <div class="card w-25 position-absolute top-50 start-50 translate-middle">
+      <div class="card-header">
+        Add Product
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+
+              <input type="text" class="form-control mb-2" placeholder="Name"
+                     [(ngModel)]="name" name="newname">
+            </div>
+            <div class="col-auto">
+
+              <input type="text" class="form-control mb-2" placeholder="Price"
+                     [(ngModel)]="price" name="newTask">
+            </div>
+            <!--      <div class="col-auto">-->
+            <!--        <label class="sr-only" for="inlineFormInputGroup">Username</label>-->
+            <!--        <div class="input-group mb-2">-->
+            <!--          <div class="input-group-prepend">-->
+            <!--            <div class="input-group-text">@</div>-->
+            <!--          </div>-->
+            <!--          <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">-->
+            <!--        </div>-->
+            <!--      </div>-->
+            <div class="col-auto">
+              <div class="form-check mb-2">
+                <input  class="form-check-input" type="checkbox" id="autoSizingCheck" [checked]="stock" (change)="stock = !stock">
+                <label class="form-check-label" for="autoSizingCheck">
+                  Stock
+                </label>
+
+              </div>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary mb-2" (click)="add_New_Product()">Ajouter</button>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</ng-template>
