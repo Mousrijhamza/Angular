@@ -1,39 +1,68 @@
-<div *ngIf="add == false; else add_prod" class="container mt-5 border">
+
+<div *ngIf="add == false; else add_prod" class="container mt-5">
+  <div class="bg-body-tertiary">
+    <br>
+  </div>
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <button class="btn btn-primary" (click)="add_produit()">Add</button>
+      <form class="d-flex">
+        <input type="text" class="form-control me-2" [(ngModel)]="searchTerm" name="searchTerm" placeholder="               search">
+      </form>
+    </div>
+  </nav>
+  <div class="bg-body-tertiary">
+    <br>
+  </div>
+  <nav class="bg-light">
+
+      <div class="form-check ms-3">
+        <label class="form-check-label" for="flexy" ></label>
+        <input type="checkbox" class="form-check-input" id="flexy" (click)="checkall()" >
+        <button class="btn btn-danger ms-3" (click)="performDelete()" >
+          <i class="bi bi-trash "></i>
+        </button>
+      </div>
+
+  </nav>
 
   <table class="table">
     <thead class="table-header ">
 
-    <nav class="navbar " style="width: 165%">
-      <div class="d-flex w-100">
-        <button class="btn btn-primary me-auto" (click)="add_produit()">Add</button>
-        <form>
-          <label>Search: </label>
-          <input type="text" class="ms-1" [(ngModel)]="searchTerm" name="searchTerm" placeholder="search">
-        </form>
-      </div>
-    </nav>
-
     <tr>
-      <th class="border position-relative" >Id</th>
-      <th class="border position-relative">Name {{btn1}}
+      <th>
+        <input type="checkbox" class="form-check-input"
+            (click)="selectAll()"
+        >
+      </th>
+      <th class=" position-relative" >#</th>
+      <th class=" position-relative">Name {{btn1}}
 
         <button name="btn1" (click)="btn1_click()" class="btn btn-link position-absolute top-50 end-0 translate-middle-y p-2">
           <i [ngClass]="btn1 ? 'bi-arrow-up-square-fill' : 'bi-arrow-up-square' " class="bi "></i></button>
         </th>
-      <th class="border position-relative">Price
+      <th class=" position-relative">Price
         <button name="btn2" (click)="btn2_click()" class="btn btn-link position-absolute top-50 end-0 translate-middle-y p-2">
           <i [ngClass]="btn2 ? 'bi-arrow-up-square-fill' : 'bi-arrow-up-square' " class="bi"></i></button>
       </th>
-      <th class="border position-relative">Stock
+      <th class="position-relative">Stock
         <button name="btn3" (click)="btn3_click()" class="btn btn-link position-absolute top-50 end-0 translate-middle-y p-2">
           <i [ngClass]="btn3 ? 'bi-arrow-up-square-fill' : 'bi-arrow-up-square' " class="bi"></i></button>
 
       </th>
     </tr>
     </thead>
-    <tbody >
-    <tr *ngFor="let li of _products | filterPipe:searchTerm | nom:btn1 | prix:btn2 |stock:btn3 " [Highlight]="li.stock">
-      <td>{{li.id}}</td>
+    <tbody>
+
+    <tr  *ngFor="let li of _products | filterPipe:searchTerm | nom:btn1 | prix:btn2 |stock:btn3 ; let i=index" [Highlight]="li.stock" >
+      <td>
+        <input type="checkbox" class="form-check-input "
+               [checked]="li.select"
+               [value]="li.id"
+               (click)="onEventhandle($event)"
+        >
+      </td>
+      <td class="col-lg-3">{{i+1}}</td>
       <td>{{li.name}}</td>
       <td>{{li.price | currency : 'EUR'}}</td>
 

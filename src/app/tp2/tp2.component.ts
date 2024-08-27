@@ -21,6 +21,7 @@ export class TP2Component implements OnInit{
   category !: ''
 
 
+  allchecked : boolean  = false;
   add : boolean = false;
   btn1: boolean = false;
   btn2: boolean = false;
@@ -32,11 +33,7 @@ export class TP2Component implements OnInit{
 
   ngOnInit(): void {
      this.getallProduct();
-
   }
-
-
-
 
   getallProduct() {
     this.product.getProduct().subscribe( {
@@ -63,8 +60,10 @@ export class TP2Component implements OnInit{
     pp.price= this.price;
     pp.stock = this.stock;
     pp.category = this.category;
-    this._products.push(pp)
+    this.product.addproduct(pp)
     this.add = !this.add;
+    this._products = this.product.getallProduct();
+
 
   }
 
@@ -94,5 +93,51 @@ export class TP2Component implements OnInit{
       this.ngOnInit()
       this.btn3 =! this.btn3
     }
+  }
+
+  checkall() {
+    if(this.allchecked == false){
+      this.allchecked != this.allchecked
+    }else {
+      this.ngOnInit()
+      this.allchecked != this.allchecked
+    }
+  }
+
+  onEventhandle($event : any) {
+      const id = $event.target.value;
+      const isChecked = $event.target.checked;
+
+      this._products = this._products.map((pip : Product) =>{
+          if (pip.id === id){
+            pip.select = isChecked
+            return pip
+          }
+          return pip
+
+        })
+
+
+
+
+
+
+  }
+
+  selectAll() {
+    this.allchecked =! this.allchecked
+    this._products.map((p)=>{
+      p.select = this.allchecked;
+    })
+  }
+
+  performDelete() {
+    this.product.setProduct(
+      this._products.filter( function (pip) {
+        return pip.select != true
+
+      })
+    );
+    this.ngOnInit()
   }
 }
